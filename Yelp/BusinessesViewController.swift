@@ -8,11 +8,22 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate {
 
+    @IBOutlet weak var yelpSearchBar: UISearchBar!
+    
     var businesses: [Business]!
     
     @IBOutlet weak var tableView: UITableView!
+    
+//    var movies: [NSDictionary]? // optional can be dict or nil, safer
+//    var allMovies: [NSDictionary]?
+    
+//    var filteredData: [NSDictionary]?
+
+    
+    var rightSearchBarButtonItem:UIBarButtonItem!
+    var leftNavBarButton: UIBarButtonItem!
 
     
     override func viewDidLoad() {
@@ -33,6 +44,11 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                 print(business.address!)
             }
         })
+        
+       
+        
+        initializeNavBar()
+        initializeYelpSearchBar()
 
 /* Example of Yelp search with more search options specified
         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
@@ -66,6 +82,80 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         return cell
     }
+    
+    func initializeNavBar(){
+    
+        
+        // Make search button and add into the navagation bar on the right
+        rightSearchBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchTapped:")
+        self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
+        
+        // make search bar into a UIBarButtonItem
+        leftNavBarButton = UIBarButtonItem(customView:yelpSearchBar)
+
+        
+        // set back button with title "Back"
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
+        
+    }
+    
+    func initializeYelpSearchBar(){
+        yelpSearchBar.delegate = self
+        yelpSearchBar.searchBarStyle = UISearchBarStyle.Minimal
+        yelpSearchBar.hidden = true
+    }
+    
+    /* ------------------------- searchBar -------------------- */
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        
+//        movies = searchText.isEmpty ? allMovies : allMovies!.filter({ (movie: NSDictionary) -> Bool in
+//            return (movie["title"] as! String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+//        })
+        tableView.reloadData()
+    }
+    
+    //MARK: UISearchBarDelegate
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar){
+        //movies = allMovies
+        tableView.reloadData()
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        hideSearchBar()
+    }
+    
+    
+    /* Helper methods */
+    func searchTapped (sender: AnyObject) {
+        showSearchBar()
+    }
+    
+    func showSearchBar() {
+        yelpSearchBar.hidden = true
+        //movieSearchBar.alpha = 0
+        navigationItem.titleView = yelpSearchBar
+        navigationItem.setRightBarButtonItem(nil, animated: true)
+        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        UIView.animateWithDuration(0.5, animations: {
+            self.yelpSearchBar.hidden = false
+            //self.movieSearchBar.alpha = 1
+            }, completion: { finished in
+                self.yelpSearchBar.becomeFirstResponder()
+        })
+    }
+    
+    func hideSearchBar() {
+        navigationItem.setRightBarButtonItem(rightSearchBarButtonItem, animated: true)
+        navigationItem.titleView = nil
+    }
+
 
     /*
     // MARK: - Navigation
