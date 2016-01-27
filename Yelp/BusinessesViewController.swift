@@ -45,6 +45,9 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             }
         })
         
+        yelpSearchBar.tintColor = UIColor.whiteColor()
+        
+        
        
         
         initializeNavBar()
@@ -87,22 +90,23 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
         
         // Make search button and add into the navagation bar on the right
-        rightSearchBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchTapped:")
-        self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
+//        rightSearchBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchTapped:")
+//        self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
         
         // make search bar into a UIBarButtonItem
-        leftNavBarButton = UIBarButtonItem(customView:yelpSearchBar)
+//        leftNavBarButton = UIBarButtonItem(customView:yelpSearchBar)
 
-        
+        navigationItem.titleView = yelpSearchBar
         // set back button with title "Back"
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
-        
+
     }
     
     func initializeYelpSearchBar(){
         yelpSearchBar.delegate = self
         yelpSearchBar.searchBarStyle = UISearchBarStyle.Minimal
-        yelpSearchBar.hidden = true
+//        yelpSearchBar.hidden = true
+        yelpSearchBar.hidden = false
     }
     
     /* ------------------------- searchBar -------------------- */
@@ -128,7 +132,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        hideSearchBar()
+        searchBar.text = ""
+        searchBar.endEditing(true)
     }
     
     
@@ -138,7 +143,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func showSearchBar() {
-        yelpSearchBar.hidden = true
+        yelpSearchBar.hidden = false
         //movieSearchBar.alpha = 0
         navigationItem.titleView = yelpSearchBar
         navigationItem.setRightBarButtonItem(nil, animated: true)
@@ -151,10 +156,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         })
     }
     
-    func hideSearchBar() {
-        navigationItem.setRightBarButtonItem(rightSearchBarButtonItem, animated: true)
-        navigationItem.titleView = nil
-    }
+//    func hideSearchBar() {
+//        navigationItem.setRightBarButtonItem(rightSearchBarButtonItem, animated: true)
+//        navigationItem.titleView = nil
+//    }
 
 
     /*
