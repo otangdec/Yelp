@@ -29,6 +29,9 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        UIApplication.sharedApplication()
         self.businessMapView.delegate = self
         
         businessName.text = business.name
@@ -44,7 +47,9 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
         
         spanX = 0.00725;
         spanY = 0.00725;
-
+        
+        //openMapForPlace()
+        openMaps(business.fullAddress!)
         
         
 //        locationManager = CLLocationManager()
@@ -54,6 +59,13 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
 //        locationManager.requestWhenInUseAuthorization()
         
         // Do any additional setup after loading the view.
+    }
+    
+    func openMaps(address: String){
+//        UIApplication.sharedApplication().openURL(NSURL(string: "http://maps.apple.com/?address=1600,PennsylvaniaAve.,20500")!)
+        //let addressModified = address.string
+        let addressString = "http://maps.apple.com/?address=\(address)".stringByReplacingOccurrencesOfString(" ", withString: ",")
+        UIApplication.sharedApplication().openURL(NSURL(string: addressString)!)
     }
     
     func goToLocation(location: CLLocation) {
@@ -87,6 +99,30 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
         mapView!.canShowCallout = false
         return mapView
     }
+    
+    
+//    func openMapForPlace() {
+//        
+//        let lat1 : NSString = "\(business.latitude)"
+//        let lng1 : NSString = "\(business.longitude)"
+//        
+//        let latitute:CLLocationDegrees =  lat1.doubleValue
+//        let longitute:CLLocationDegrees =  lng1.doubleValue
+//        
+//        let regionDistance:CLLocationDistance = 10000
+//        let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+//        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+//        let options = [
+//            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+//            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+//        ]
+//        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+//        let mapItem = MKMapItem(placemark: placemark)
+//        mapItem.name = "\(business.name)"
+//        
+//        mapItem.openInMapsWithLaunchOptions(options)
+//        
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
