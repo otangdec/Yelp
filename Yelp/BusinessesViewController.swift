@@ -35,15 +35,16 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         tableView.estimatedRowHeight = 120
         
 
-        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
-        
-            for business in businesses {
-                print(business.name!)
-                print(business.address!)
-            }
-        })
+//        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+//            self.businesses = businesses
+//            self.allBusinesses = self.businesses
+//            self.tableView.reloadData()
+//        
+//            for business in businesses {
+//                print(business.name!)
+//                print(business.address!)
+//            }
+//        })
         
         yelpSearchBar.tintColor = UIColor.whiteColor()
         
@@ -52,6 +53,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         initializeNavBar()
         initializeYelpSearchBar()
+        
+        
 
 /* Example of Yelp search with more search options specified
         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
@@ -63,6 +66,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
 */
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,6 +121,17 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchBar.setShowsCancelButton(true, animated: true)
         
+        Business.searchWithTerm(searchText, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            self.tableView.reloadData()
+            
+            for business in businesses {
+                //print(business.name!)
+                //print(business.address!)
+            }
+        })
+
+        
 //        movies = searchText.isEmpty ? allMovies : allMovies!.filter({ (movie: NSDictionary) -> Bool in
 //            return (movie["title"] as! String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
 //        })
@@ -154,6 +172,17 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             }, completion: { finished in
                 self.yelpSearchBar.becomeFirstResponder()
         })
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
+        let business = businesses![indexPath!.row]
+        
+        let detailViewController = segue.destinationViewController as! DetailViewController
+        detailViewController.business = business
     }
     
 //    func hideSearchBar() {
