@@ -10,9 +10,9 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class DetailViewController: UIViewController {
-    
+class DetailViewController: UIViewController, MKMapViewDelegate {
 
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var reviewImageView: UIImageView!
     
     @IBOutlet weak var businessName: UILabel!
@@ -29,12 +29,15 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.businessMapView.delegate = self
+        
         businessName.text = business.name
         if business.imageURL != nil {
             reviewImageView.setImageWithURL(business.ratingImageURL!)
         }
         
         reviewsCountLabel.text = "\(business.reviewCount!) Reviews"
+        addressLabel.text = business.fullAddress
         
         let centerLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
         goToLocation(centerLocation)
@@ -67,8 +70,22 @@ class DetailViewController: UIViewController {
         let locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude)
         annotation.coordinate = locationCoordinate
         annotation.title = title
-        
         businessMapView.addAnnotation(annotation)
+    }
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!
+        ) -> MKAnnotationView! {
+        let annotationReuseId = "Place"
+        var mapView = businessMapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseId)
+        if mapView == nil {
+            mapView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseId)
+        } else {
+            mapView!.annotation = annotation
+        }
+        mapView!.image = UIImage(named: "yelp-pin")
+        mapView!.backgroundColor = UIColor.clearColor()
+        mapView!.canShowCallout = false
+        return mapView
     }
 
     override func didReceiveMemoryWarning() {

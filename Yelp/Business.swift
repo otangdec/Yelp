@@ -11,6 +11,8 @@ import UIKit
 class Business: NSObject {
     let name: String?
     let address: String?
+    var fullAddress: String?
+    let phoneNumber: String?
     let imageURL: NSURL?
     let categories: String?
     let distance: String?
@@ -18,9 +20,11 @@ class Business: NSObject {
     let reviewCount: NSNumber?
     let latitude: Double
     let longitude: Double
+    let snippetText: String?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
+        fullAddress = ""
         
         let imageURLString = dictionary["image_url"] as? String
         if imageURLString != nil {
@@ -45,7 +49,12 @@ class Business: NSObject {
                 }
                 address += neighborhoods![0] as! String
             }
-            
+            let displayAddressArray = location!["display_address"] as? NSArray
+            if displayAddressArray!.count > 0 {
+                fullAddress = "\(displayAddressArray![0]), \(displayAddressArray![2])"
+            }
+
+        
             coordinates = (location!["coordinate"] as? NSDictionary)!
             latitude = coordinates["latitude"] as? Double ?? 0.0
             longitude = coordinates["longitude"] as? Double ?? 0.0
@@ -55,6 +64,8 @@ class Business: NSObject {
             longitude = 0.0
         }
         self.address = address
+        self.phoneNumber = dictionary["phone"] as? String
+        
         
         let categoriesArray = dictionary["categories"] as? [[String]]
         //print(categoriesArray)
@@ -84,6 +95,7 @@ class Business: NSObject {
             ratingImageURL = nil
         }
         
+        snippetText = dictionary["snippet_text"] as? String
         reviewCount = dictionary["review_count"] as? NSNumber
     }
     

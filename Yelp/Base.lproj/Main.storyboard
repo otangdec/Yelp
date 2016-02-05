@@ -200,22 +200,30 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEZ-W2-FlB">
-                                <rect key="frame" x="14" y="127" width="285" height="21"/>
+                                <rect key="frame" x="14" y="190" width="285" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Sg-wt-ouf">
-                                <rect key="frame" x="0.0" y="172" width="320" height="222"/>
+                                <rect key="frame" x="5" y="235" width="309" height="158"/>
                                 <animations/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S85-Th-tE9">
+                                <rect key="frame" x="14" y="122" width="268" height="26"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Yelp" id="xxg-K6-uuV"/>
                     <connections>
+                        <outlet property="addressLabel" destination="S85-Th-tE9" id="ndv-TR-Bey"/>
                         <outlet property="businessMapView" destination="6Sg-wt-ouf" id="zMd-za-HH1"/>
                         <outlet property="businessName" destination="eDJ-LE-8Cc" id="ZsW-8S-Djj"/>
                         <outlet property="reviewImageView" destination="H0n-RN-2mv" id="Og7-pR-YjF"/>
