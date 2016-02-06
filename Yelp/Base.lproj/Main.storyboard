@@ -167,6 +167,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ih-OV-zul">
+                                <rect key="frame" x="0.0" y="64" width="320" height="127"/>
+                                <animations/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Business Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDJ-LE-8Cc">
                                 <rect key="frame" x="14" y="73" width="234" height="23"/>
                                 <animations/>
@@ -189,36 +193,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0n-RN-2mv">
-                                <rect key="frame" x="14" y="99" width="83" height="15"/>
+                                <rect key="frame" x="14" y="101" width="83" height="15"/>
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="369 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7B-NA-ZgL">
-                                <rect key="frame" x="106" y="96" width="83" height="21"/>
+                                <rect key="frame" x="106" y="98" width="101" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEZ-W2-FlB">
-                                <rect key="frame" x="14" y="190" width="285" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Sg-wt-ouf">
-                                <rect key="frame" x="5" y="235" width="309" height="158"/>
-                                <animations/>
-                            </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S85-Th-tE9">
-                                <rect key="frame" x="14" y="122" width="193" height="52"/>
+                                <rect key="frame" x="14" y="122" width="193" height="36"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvc-QD-Yas">
-                                <rect key="frame" x="216" y="133" width="99" height="30"/>
+                                <rect key="frame" x="216" y="128" width="99" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Get Direction">
@@ -228,6 +221,17 @@
                                     <action selector="callMapOnTouch:" destination="Wd3-zg-mkL" eventType="touchDown" id="qps-oj-3Zb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="415-999-9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4Y-tR-DKd">
+                                <rect key="frame" x="14" y="164" width="169" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Sg-wt-ouf">
+                                <rect key="frame" x="0.0" y="193" width="320" height="160"/>
+                                <animations/>
+                            </mapView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -235,8 +239,10 @@
                     <navigationItem key="navigationItem" title="Yelp" id="xxg-K6-uuV"/>
                     <connections>
                         <outlet property="addressLabel" destination="S85-Th-tE9" id="ndv-TR-Bey"/>
+                        <outlet property="bgImageView" destination="0ih-OV-zul" id="Fp3-sH-SVr"/>
                         <outlet property="businessMapView" destination="6Sg-wt-ouf" id="zMd-za-HH1"/>
                         <outlet property="businessName" destination="eDJ-LE-8Cc" id="ZsW-8S-Djj"/>
+                        <outlet property="displayPhoneLabel" destination="f4Y-tR-DKd" id="Ivt-GW-ipU"/>
                         <outlet property="getDirectionButton" destination="xvc-QD-Yas" id="RPi-Kh-SwO"/>
                         <outlet property="reviewImageView" destination="H0n-RN-2mv" id="Og7-pR-YjF"/>
                         <outlet property="reviewsCountLabel" destination="Y7B-NA-ZgL" id="ai8-Rj-YPD"/>

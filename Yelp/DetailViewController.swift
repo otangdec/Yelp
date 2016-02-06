@@ -12,9 +12,11 @@ import CoreLocation
 
 class DetailViewController: UIViewController, MKMapViewDelegate {
 
+    @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var reviewImageView: UIImageView!
     
+    @IBOutlet weak var displayPhoneLabel: UILabel!
  
     @IBOutlet weak var getDirectionButton: UIButton!
     @IBOutlet weak var businessName: UILabel!
@@ -44,6 +46,9 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
         
         reviewsCountLabel.text = "\(business.reviewCount!) Reviews"
         addressLabel.text = business.fullAddress
+        displayPhoneLabel.text = "Tel: \(business.displayPhone!)"
+        bgImageView.setImageWithURL(business.imageURL!)
+
         
         let centerLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
         goToLocation(centerLocation)
@@ -69,8 +74,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     func openMaps(address: String){
-//        UIApplication.sharedApplication().openURL(NSURL(string: "http://maps.apple.com/?address=1600,PennsylvaniaAve.,20500")!)
-        //let addressModified = address.string
         let addressString = "http://maps.apple.com/?address=\(address)".stringByReplacingOccurrencesOfString(" ", withString: ",")
         UIApplication.sharedApplication().openURL(NSURL(string: addressString)!)
     }

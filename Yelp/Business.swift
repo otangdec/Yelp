@@ -13,6 +13,7 @@ class Business: NSObject {
     let address: String?
     var fullAddress: String?
     let phoneNumber: String?
+    let displayPhone: String?
     let imageURL: NSURL?
     let categories: String?
     let distance: String?
@@ -68,7 +69,7 @@ class Business: NSObject {
         }
         self.address = address
         self.phoneNumber = dictionary["phone"] as? String
-        
+        self.displayPhone = dictionary["display_phone"] as? String
         
         let categoriesArray = dictionary["categories"] as? [[String]]
         //print(categoriesArray)
