@@ -50,10 +50,11 @@ class Business: NSObject {
                 address += neighborhoods![0] as! String
             }
             let displayAddressArray = location!["display_address"] as? NSArray
-            if displayAddressArray!.count > 0 {
-                fullAddress = "\(displayAddressArray![0]), \(displayAddressArray![2])"
+            if displayAddressArray != nil{
+                for str in displayAddressArray!{
+                    fullAddress?.appendContentsOf("\(str) ")
+                }
             }
-
         
             coordinates = (location!["coordinate"] as? NSDictionary)!
             latitude = coordinates["latitude"] as? Double ?? 0.0
