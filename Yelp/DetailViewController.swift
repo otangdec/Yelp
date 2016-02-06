@@ -15,6 +15,8 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var reviewImageView: UIImageView!
     
+ 
+    @IBOutlet weak var getDirectionButton: UIButton!
     @IBOutlet weak var businessName: UILabel!
     
     @IBOutlet weak var reviewsCountLabel: UILabel!
@@ -26,6 +28,7 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
     var spanY: Float = 0.0
 
  
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,8 +51,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
         spanX = 0.00725;
         spanY = 0.00725;
         
-        //openMapForPlace()
-        openMaps(business.fullAddress!)
         
         
 //        locationManager = CLLocationManager()
@@ -59,6 +60,12 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
 //        locationManager.requestWhenInUseAuthorization()
         
         // Do any additional setup after loading the view.
+    }
+    
+    
+
+    @IBAction func callMapOnTouch(sender: AnyObject) {
+        openMaps(business.fullAddress!)
     }
     
     func openMaps(address: String){

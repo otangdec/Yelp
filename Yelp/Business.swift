@@ -51,8 +51,10 @@ class Business: NSObject {
             }
             let displayAddressArray = location!["display_address"] as? NSArray
             if displayAddressArray != nil{
-                for str in displayAddressArray!{
-                    fullAddress?.appendContentsOf("\(str) ")
+                for (index, element) in displayAddressArray!.enumerate() {
+                    if(index != 1){
+                        fullAddress?.appendContentsOf("\(element) ")
+                    }
                 }
             }
         
