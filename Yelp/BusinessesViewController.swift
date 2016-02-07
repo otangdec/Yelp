@@ -8,11 +8,13 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var yelpSearchBar: UISearchBar!
-    
     var businesses: [Business]!
+    var isMoreDataLoading = false
+    var loadingMoreView:InfiniteScrollActivityView?
+    var loadMoreOffset = 20
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -35,6 +37,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         tableView.estimatedRowHeight = 120
         
         yelpSearchBar.becomeFirstResponder()
+        yelpSearchBar.tintColor = UIColor.whiteColor()
+        
+        initializeNavBar()
+        initializeYelpSearchBar()
 
 //        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
 //            self.businesses = businesses
@@ -46,14 +52,18 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 //                print(business.address!)
 //            }
 //        })
+
         
-        yelpSearchBar.tintColor = UIColor.whiteColor()
+        // Set up Infinite Scroll loading indicator
+        let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.hidden = true
+        tableView.addSubview(loadingMoreView!)
         
-        
-       
-        
-        initializeNavBar()
-        initializeYelpSearchBar()
+        var insets = tableView.contentInset;
+        insets.bottom += InfiniteScrollActivityView.defaultHeight;
+        tableView.contentInset = insets
+
         
         
 
@@ -68,6 +78,47 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
 */
     }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging){
+                    isMoreDataLoading = true
+                
+                    // Update position of loadingMoreView, and start loading indicator
+                    let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+                    loadingMoreView?.frame = frame
+                    loadingMoreView!.startAnimating()
+                
+                    // Load more result
+                    loadMoreData()
+            }
+        }
+    }
+    
+    func loadMoreData() {
+        Business.searchWithTerm(yelpSearchBar.text!, offset: loadMoreOffset, sort: nil, categories: nil, deals: nil, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+//        Business.searchWithTerm("Restaurants", offset: loadMoreOffset, sort: nil, categories: [], deals: nil, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            if error != nil {
+                    self.loadingMoreView?.stopAnimating()
+                    //TODO: show network error
+            } else {
+                    self.loadMoreOffset += 20
+                    self.businesses.appendContentsOf(businesses)
+                    //self.filteredBusinesses.appendContentsOf(businesses)
+                    self.tableView.reloadData()
+                    self.loadingMoreView?.stopAnimating()
+                    self.isMoreDataLoading = false
+            }
+        })
+        
+    }
+    
+    /* ============================================================= */
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
@@ -105,9 +156,20 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 //        leftNavBarButton = UIBarButtonItem(customView:yelpSearchBar)
 
         navigationItem.titleView = yelpSearchBar
+        
+                rightSearchBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: "goToMapView")
+                self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
+        
+        
         // set back button with title "Back"
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
+        
+        
 
+    }
+    
+    func goToMapView(){
+        
     }
     
     func initializeYelpSearchBar(){
@@ -121,6 +183,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchBar.setShowsCancelButton(true, animated: true)
+        
         
         Business.searchWithTerm(searchText, completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses

@@ -74,7 +74,12 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     func openMaps(address: String){
+        // replace space with commas to make it work with map
         let addressString = "http://maps.apple.com/?address=\(address)".stringByReplacingOccurrencesOfString(" ", withString: ",")
+        
+        // delete the last character
+        //let addressString = addressStringOriginal.substringToIndex(addressStringOriginal.endIndex.predecessor())
+
         UIApplication.sharedApplication().openURL(NSURL(string: addressString)!)
     }
     
