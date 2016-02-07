@@ -15,6 +15,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
     var loadMoreOffset = 20
+    var searchTerm = "Restaurants"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -113,6 +114,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                     self.tableView.reloadData()
                     self.loadingMoreView?.stopAnimating()
                     self.isMoreDataLoading = false
+
             }
         })
         
@@ -157,15 +159,12 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 
         navigationItem.titleView = yelpSearchBar
         
-                rightSearchBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: "goToMapView")
-                self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
-        
+//        rightSearchBarButtonItem = UIBarButtonItem(image: UIImage(named: "Map"), style: UIBarButtonItemStyle.Plain, target: self, action: "goToMapView")
+//
+//        self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
         
         // set back button with title "Back"
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
-        
-        
-
     }
     
     func goToMapView(){
@@ -183,7 +182,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchBar.setShowsCancelButton(true, animated: true)
-        
+        navigationItem.setRightBarButtonItem(nil, animated: true)
         
         Business.searchWithTerm(searchText, completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
@@ -205,6 +204,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: UISearchBarDelegate
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
+        navigationItem.setRightBarButtonItem(nil, animated: true)
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar){
@@ -216,6 +216,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.endEditing(true)
+        navigationItem.setRightBarButtonItem(rightSearchBarButtonItem, animated: true)
     }
     
     

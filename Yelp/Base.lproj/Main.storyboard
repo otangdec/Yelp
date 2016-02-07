@@ -145,7 +145,19 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Yelp" id="9Os-uF-tMd"/>
+                    <navigationItem key="navigationItem" title="Yelp" id="9Os-uF-tMd">
+                        <barButtonItem key="rightBarButtonItem" image="Map" style="plain" id="mm5-nV-YkK">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZZs-0O-bzF">
+                                <rect key="frame" x="279" y="9" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <state key="normal" image="Map"/>
+                            </button>
+                            <connections>
+                                <segue destination="gq4-eS-rml" kind="push" id="caB-TK-WwY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="cAV-Aw-r9o" id="TXg-TG-2oe"/>
                         <outlet property="yelpSearchBar" destination="Qys-eX-Dfz" id="x8r-lw-619"/>
@@ -250,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p3j-JH-f8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="339"/>
+            <point key="canvasLocation" x="1921" y="707"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="m2z-bL-tPY">
@@ -272,10 +284,10 @@
             </objects>
             <point key="canvasLocation" x="953" y="338"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="fwd-K6-mfW">
             <objects>
-                <viewController id="gq4-eS-rml" sceneMemberID="viewController">
+                <viewController id="gq4-eS-rml" customClass="MapViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eIG-0f-e5K"/>
                         <viewControllerLayoutGuide type="bottom" id="bmu-Zg-pSl"/>
@@ -292,11 +304,15 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="zcs-I5-LlW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zHI-fB-6dH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1656" y="958"/>
+            <point key="canvasLocation" x="1930" y="13"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Map" width="25" height="25"/>
+    </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
