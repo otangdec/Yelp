@@ -10,6 +10,7 @@ import UIKit
 
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate, UIScrollViewDelegate {
 
+    @IBOutlet weak var mapButton: UIBarButtonItem!
     @IBOutlet weak var yelpSearchBar: UISearchBar!
     var businesses: [Business]!
     var isMoreDataLoading = false
@@ -31,7 +32,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        modalTransitionStyle = .FlipHorizontal
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -162,7 +163,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 //        rightSearchBarButtonItem = UIBarButtonItem(image: UIImage(named: "Map"), style: UIBarButtonItemStyle.Plain, target: self, action: "goToMapView")
 //
 //        self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
-        
+        navigationItem.rightBarButtonItem = mapButton
         // set back button with title "Back"
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
     }
@@ -182,7 +183,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchBar.setShowsCancelButton(true, animated: true)
-        navigationItem.setRightBarButtonItem(nil, animated: true)
+        //navigationItem.setRightBarButtonItem(nil, animated: true)
         
         Business.searchWithTerm(searchText, completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
@@ -204,50 +205,57 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: UISearchBarDelegate
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
-        navigationItem.setRightBarButtonItem(nil, animated: true)
+        //navigationItem.setRightBarButtonItem(nil, animated: true)
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar){
         //movies = allMovies
         tableView.reloadData()
         searchBar.setShowsCancelButton(false, animated: true)
+        navigationItem.setRightBarButtonItem(mapButton, animated: true)
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.endEditing(true)
-        navigationItem.setRightBarButtonItem(rightSearchBarButtonItem, animated: true)
+        navigationItem.setRightBarButtonItem(mapButton, animated: true)
     }
     
     
-    /* Helper methods */
-    func searchTapped (sender: AnyObject) {
-        showSearchBar()
-    }
-    
-    func showSearchBar() {
-        yelpSearchBar.hidden = false
-        //movieSearchBar.alpha = 0
-        navigationItem.titleView = yelpSearchBar
-        navigationItem.setRightBarButtonItem(nil, animated: true)
-        navigationItem.setLeftBarButtonItem(nil, animated: true)
-        UIView.animateWithDuration(0.5, animations: {
-            self.yelpSearchBar.hidden = false
-            //self.movieSearchBar.alpha = 1
-            }, completion: { finished in
-                self.yelpSearchBar.becomeFirstResponder()
-        })
-    }
+//    func showSearchBar() {
+//        yelpSearchBar.hidden = false
+//        //movieSearchBar.alpha = 0
+//        navigationItem.titleView = yelpSearchBar
+//        navigationItem.setRightBarButtonItem(mapButton, animated: true)
+//        //navigationItem.setLeftBarButtonItem(nil, animated: true)
+//        UIView.animateWithDuration(0.5, animations: {
+//            self.yelpSearchBar.hidden = false
+//            //self.movieSearchBar.alpha = 1
+//            }, completion: { finished in
+//                self.yelpSearchBar.becomeFirstResponder()
+//        })
+//    }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPathForCell(cell)
-        let business = businesses![indexPath!.row]
+        if segue.identifier == "BusinessDetailsSegue" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let business = businesses![indexPath!.row]
+            
+            let detailViewController = segue.destinationViewController as! DetailViewController
+            detailViewController.business = business
+        } else if segue.identifier == "MapSegue" {
+            let mapViewController = segue.destinationViewController as! MapViewController
+            if businesses != nil && businesses.count > 0 {
+            mapViewController.businesses = businesses
+            } else {
+                mapViewController.businesses = []
+            }
+        }
         
-        let detailViewController = segue.destinationViewController as! DetailViewController
-        detailViewController.business = business
+        
     }
     
 //    func hideSearchBar() {
