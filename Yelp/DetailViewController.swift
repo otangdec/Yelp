@@ -56,11 +56,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
         spanX = 0.00725;
         spanY = 0.00725;
         
-        
-
-        
-        
-        
 //        locationManager = CLLocationManager()
 //        locationManager.delegate = self // self does not work for some reason
 //        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -119,28 +114,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-//    func openMapForPlace() {
-//        
-//        let lat1 : NSString = "\(business.latitude)"
-//        let lng1 : NSString = "\(business.longitude)"
-//        
-//        let latitute:CLLocationDegrees =  lat1.doubleValue
-//        let longitute:CLLocationDegrees =  lng1.doubleValue
-//        
-//        let regionDistance:CLLocationDistance = 10000
-//        let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
-//        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-//        let options = [
-//            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
-//            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
-//        ]
-//        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-//        let mapItem = MKMapItem(placemark: placemark)
-//        mapItem.name = "\(business.name)"
-//        
-//        mapItem.openInMapsWithLaunchOptions(options)
-//        
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
