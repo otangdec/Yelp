@@ -32,7 +32,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        modalTransitionStyle = .FlipHorizontal
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -43,6 +43,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         initializeNavBar()
         initializeYelpSearchBar()
+        
+
 
 //        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
 //            self.businesses = businesses
@@ -118,7 +120,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 
             }
         })
-        
+
     }
     
     /* ============================================================= */

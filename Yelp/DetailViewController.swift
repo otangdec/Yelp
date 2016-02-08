@@ -35,7 +35,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         
-        
         UIApplication.sharedApplication()
         self.businessMapView.delegate = self
         
