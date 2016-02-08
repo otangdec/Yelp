@@ -22,12 +22,13 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Add "Get direction" to send address to maps app
-- [x] Add Auto layout so the app work in both lanscape and portrait
+- [x] Add Auto layout so the app work in both landscape and portrait
+- [x] Customize Map: zoom level and map pin
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. 
-2. 
+1. How to make a better use of MVC 
+2. How to work with filter
 
 ## Video Walkthrough 
 
