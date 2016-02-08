@@ -10,13 +10,20 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var businessesMap: MKMapView!
     var businesses: [Business]!
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let logo = UIImage(named: "yelp-logo")
+//        let imageView = UIImageView(image:logo)
+//        self.navigationItem.titleView = imageView
+    
 
         var centerLocation = CLLocation()
         if businesses.count > 0 {
@@ -25,6 +32,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             centerLocation = CLLocation(latitude: 0.0, longitude: 0.0)
         }
         goToLocation(centerLocation)
+        
+        
         // Do any additional setup after loading the view.
     }
 //    // get user location
@@ -34,7 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //    }
     
     func goToLocation(location: CLLocation) {
-        let span = MKCoordinateSpanMake(0.1, 0.1)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(location.coordinate, span)
         businessesMap.setRegion(region, animated: false)
         
@@ -67,7 +76,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             return mapView
     }
     
-    
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

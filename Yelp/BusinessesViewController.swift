@@ -165,7 +165,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 //        self.navigationItem.rightBarButtonItem = rightSearchBarButtonItem
         navigationItem.rightBarButtonItem = mapButton
         // set back button with title "Back"
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
+
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "List"), style: .Plain, target: nil, action: nil)
+
+
     }
     
     func goToMapView(){
@@ -195,10 +198,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 //            }
         })
 
-        
-//        movies = searchText.isEmpty ? allMovies : allMovies!.filter({ (movie: NSDictionary) -> Bool in
-//            return (movie["title"] as! String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
-//        })
+
         tableView.reloadData()
     }
     
@@ -221,22 +221,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         navigationItem.setRightBarButtonItem(mapButton, animated: true)
     }
     
-    
-//    func showSearchBar() {
-//        yelpSearchBar.hidden = false
-//        //movieSearchBar.alpha = 0
-//        navigationItem.titleView = yelpSearchBar
-//        navigationItem.setRightBarButtonItem(mapButton, animated: true)
-//        //navigationItem.setLeftBarButtonItem(nil, animated: true)
-//        UIView.animateWithDuration(0.5, animations: {
-//            self.yelpSearchBar.hidden = false
-//            //self.movieSearchBar.alpha = 1
-//            }, completion: { finished in
-//                self.yelpSearchBar.becomeFirstResponder()
-//        })
-//    }
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "BusinessDetailsSegue" {
@@ -258,11 +242,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-//    func hideSearchBar() {
-//        navigationItem.setRightBarButtonItem(rightSearchBarButtonItem, animated: true)
-//        navigationItem.titleView = nil
-//    }
-
 
     /*
     // MARK: - Navigation

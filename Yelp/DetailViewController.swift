@@ -57,6 +57,9 @@ class DetailViewController: UIViewController, MKMapViewDelegate {
         spanY = 0.00725;
         
         
+
+        
+        
         
 //        locationManager = CLLocationManager()
 //        locationManager.delegate = self // self does not work for some reason
