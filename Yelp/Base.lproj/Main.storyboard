@@ -152,7 +152,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Yelp" id="9Os-uF-tMd">
-                        <barButtonItem key="rightBarButtonItem" image="68BCEB55-7924-4BD2-9840-A0F002458135" style="plain" id="mm5-nV-YkK">
+                        <barButtonItem key="rightBarButtonItem" image="1830D073-E7F9-41E6-A180-D3A650EEBF4D" style="plain" id="mm5-nV-YkK">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZZs-0O-bzF">
                                 <rect key="frame" x="279" y="9" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -351,7 +351,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="68BCEB55-7924-4BD2-9840-A0F002458135" width="25" height="25">
+        <image name="1830D073-E7F9-41E6-A180-D3A650EEBF4D" width="25" height="25">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
